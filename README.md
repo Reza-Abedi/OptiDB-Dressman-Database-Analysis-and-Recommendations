@@ -99,7 +99,7 @@ Implementing the Outlet Functionality: Products intended for the Outlet are iden
 When users visit our website and view products, the "IsInOutlet" value is used to indicate that these products are available in the Outlet, and the prices are applicable only online.
  
  
-# Assignment Report: Database Queries and Operations for Dressman Database
+# Assignment Report: Database Queries and Operations 
 
 ## Overview:
 The queries and operations performed on the Dressman database span a range of tasks, from basic data retrieval to more complex analysis and optimization techniques. This report provides a comprehensive summary of the SQL queries, stored procedures, views, and an index implemented for various purposes within the Dressman database.
