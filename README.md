@@ -2,12 +2,13 @@
 The selection of the name 'Dressmann' is purely hypothetical in the context of this assignment.
 
  
-# Summary of the Database Structure and Business Rules
+## Summary of the Database Structure and Business Rules
 This report delves into the considerations for improving the Dressman database, focusing on documentation, data types, and specific constraints within the database schema. It provides an in-depth examination of constraints related to user, address, payment method, product category, product, shopping cart, order, order item, review, favorite, and promotion. Additionally, it outlines the implementation of outlet functionality in the Product table. The second part of the report offers an overview of queries and operations performed on the Dressman database, covering data retrieval, analysis, and optimization techniques.
 This comprehensive database system is designed to manage various aspects of an e-commerce platform, from user information to product categorization, orders, and promotional activities. Key business rules and constraints have been implemented to ensure data integrity and meaningful relationships among entities. Below is a summary of the database's vision and its essential components:
  
 ## Strengths
-- Normalization: The tables seem to be normalized, reducing redundancy and improving data integrity.
+### Normalization: 
+The tables seem to be normalized, reducing redundancy and improving data integrity.
 - Clear Relationships: Relationships between entities are well-defined using foreign keys, ensuring data consistency.
 - 	Automated ID Generation: The use of sequences and default constraints for user and product IDs automates the generation of unique identifiers, streamlining data entry.
 	Flexibility: The design allows for flexibility, such as multiple addresses and payment methods per user, supporting diverse user scenarios.
