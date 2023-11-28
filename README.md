@@ -7,7 +7,7 @@ This report delves into the considerations for improving the Dressman database, 
 This comprehensive database system is designed to manage various aspects of an e-commerce platform, from user information to product categorization, orders, and promotional activities. Key business rules and constraints have been implemented to ensure data integrity and meaningful relationships among entities. Below is a summary of the database's vision and its essential components:
  
 ## Strengths
-### Normalization: 
+#### Normalization: 
 The tables seem to be normalized, reducing redundancy and improving data integrity.
 - Clear Relationships: Relationships between entities are well-defined using foreign keys, ensuring data consistency.
 - 	Automated ID Generation: The use of sequences and default constraints for user and product IDs automates the generation of unique identifiers, streamlining data entry.
