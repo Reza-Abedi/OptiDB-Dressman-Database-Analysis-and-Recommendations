@@ -1,19 +1,14 @@
-﻿
-
 /****************************** Assignment Report **************************************
            Database Queries and Operations for Dressman Database
 
 Overview:
 The queries and operations performed on the Dressman database span a range of tasks,
 from basic data retrieval to more complex analysis and optimization techniques. 
-This report provides a comprehensive summary of the SQL queries, s
-tored procedures, views, and an index implemented for various purposes
-within the Dressman database.
+This report provides a comprehensive summary of the SQL queries, stored procedures, views, 
+and an index implemented for various purposes within the Dressman database.
 *****************************************************************************************/
 
-
-
--- 1. Välj en användare via sitt namn och visa all hans kontaktinformation
+-- 1. Select a user by name and display all their contact information
 
 SELECT 
     U.UserID,
@@ -28,12 +23,11 @@ SELECT
 FROM Users U
 INNER JOIN UserAddress UA ON U.UserID = UA.UserID
 WHERE U.FirstName = 'Anna' AND U.LastName = 'Andersson';
--- -- Utilizing an INNER JOIN between Users and UserAddress, this query offers a glimpse into the detailed user profile.
-
+-- Utilizing an INNER JOIN between Users and UserAddress, this query offers a glimpse into the detailed user profile.
 
 ---------------------------------------------------------------------------------------------
 
--- 2. Vilken användare har spenderat mest pengar?
+-- 2. Which user has spent the most money?
 
 SELECT TOP 1
     u.UserID,
@@ -48,9 +42,9 @@ ORDER BY TotalSpent DESC;
 
 ---------------------------------------------------------------------------------------------
 
--- 3. Välj alla användare från ett viss land och visa alla deras beställningar
+-- 3. Select all users from a specific country and display all their orders
 
--- Replace  a Country 
+-- Replace a Country 
 DECLARE @Country NVARCHAR(50) = 'Italy';
 
 -- Select all users from the specified country and display their orders
@@ -58,7 +52,7 @@ SELECT
     U.UserID,
     U.FirstName,
     U.LastName,
-	A.Country,
+    A.Country,
     O.OrderID,
     O.OrderDate,
     O.Status,
@@ -72,13 +66,13 @@ FROM Users U
 JOIN UserAddress A ON U.UserID = A.UserID
 LEFT JOIN Orders O ON U.UserID = O.UserID
 WHERE A.Country = @Country;
---  A LEFT JOIN is established with the Orders table (alias O) based on the user ID. 
+-- A LEFT JOIN is established with the Orders table (alias O) based on the user ID. 
 -- This type of join ensures that all users, regardless of order history, are included in the result.
 -- The WHERE clause specifies that the query should only consider users from the country specified by the @Country variable. 
 
 ---------------------------------------------------------------------------------------------
 
--- 4. Vilken är den dyraste produkten i butiken?
+-- 4. What is the most expensive product in the store?
 
 SELECT TOP 1
     ProductID,
@@ -93,19 +87,19 @@ straightforward SELECT statement with TOP 1 and ORDER BY clauses.
 
 ---------------------------------------------------------------------------------------------
 
--- 5. Hur många produkter finns det totalt i butiken?
+-- 5. How many products are there in total in the store?
 
 SELECT SUM(AvailableQuantity) AS TotalStockQuantity
 FROM ProductInventory;
 
 /*  
 The query calculates the total number of products available,
- contributing to a holistic view of stock levels
- */
+contributing to a holistic view of stock levels
+*/
 
 ---------------------------------------------------------------------------------------------
 
--- 6. Hur mycket är det totala värdet (sek) av samtliga produkter?
+-- 6. What is the total value (SEK) of all products?
 
 SELECT 
     p.ProductID, 
@@ -128,20 +122,20 @@ SELECT
     CONCAT(SUM(p.price * pi.AvailableQuantity), ' SEK') AS total_value
 FROM products p
 INNER JOIN ProductInventory pi ON p.ProductID = pi.ProductID;
- /*
- The query starts by calculating the total value for each individual 
- product by multiplying the unit price (p.price) with the available quantity (pi.AvailableQuantity).
- A UNION statement is used to append a row representing the grand total to the result set.
- The grand total row summarizes the overall value of Dressman's entire 
- inventory by summing up the total values of all individual products.
- */
+/*
+The query starts by calculating the total value for each individual 
+product by multiplying the unit price (p.price) with the available quantity (pi.AvailableQuantity).
+A UNION statement is used to append a row representing the grand total to the result set.
+The grand total row summarizes the overall value of Dressman's entire 
+inventory by summing up the total values of all individual products.
+*/
 
 
 ---------------------------------------------------------------------------------------------
 
--- 7. Skapa en syntax som använder GROUP BY
+-- 7. Create syntax using GROUP BY
 
--- Få den totala sålda kvantiteten för varje produkt i varje stad, tillsammans med kundinformation
+-- Get the total quantity sold for each product in each city, along with customer information
 SELECT
     U.FirstName,
     U.LastName,
@@ -167,9 +161,9 @@ total quantity sold for each product in every city.
 
 ---------------------------------------------------------------------------------------------
 
--- 8. Skapa syntaxer som använder MIN, MAX, SUM & AVG
+-- 8. Create syntax using MIN, MAX, SUM & AVG
 
--- Välj användarinformation tillsammans med orderstatistik
+-- Select user information along with order statistics
 SELECT
     U.UserID,
     U.FirstName,
@@ -183,11 +177,11 @@ FROM Users U
 INNER JOIN Orders O ON U.UserID = O.UserID
 GROUP BY U.UserID, U.FirstName, U.LastName;
 
-
 ---------------------------------------------------------------------------------------------
--- 9. Skapa syntaxer som sortera resultatet
 
--- Sortera beställningar efter kund och datum i stigande ordning
+-- 9. Create syntaxes that use sorting in the result
+
+-- Sort orders by customer and date in ascending order
 SELECT
     OrderID,
     UserID,
@@ -197,18 +191,15 @@ FROM
 ORDER BY
     UserID, OrderDate;
 
-
 ---------------------------------------------------------------------------------------------
 
--- 10. Skapa en syntax som använder variabler
+-- 10. Create syntax using variables
 
+DECLARE @MinOrderAmount money; -- Declare a variable with the name
 
+SET @MinOrderAmount = 100.00; -- Assign the value 100.00 to the variable
 
-DECLARE @MinOrderAmount money; --Detta deklarerar en variabel med namnet
-
-SET @MinOrderAmount = 100.00; -- Detta tilldelar värdet 100.00 till variabeln
-
--- Detta är en SELECT-fråga som hämtar orderdär TotalAmount är större eller lika med 
+-- This is a SELECT query that retrieves orders where TotalAmount is greater than or equal to 
 SELECT
     OrderID,
     OrderDate,
@@ -218,12 +209,11 @@ FROM
 WHERE
     TotalAmount >= @MinOrderAmount;
 
-
 ---------------------------------------------------------------------------------------------
 
--- 11. Skapa minst 1 stored procedure
+-- 11. Create at least 1 stored procedure
 
-
+-- Stored procedure to get user information
 CREATE PROCEDURE GetUserInformation
     @UserID NVARCHAR(10)
 AS
@@ -243,11 +233,8 @@ BEGIN
     WHERE
         UserID = @UserID;
 END;
--- Exempel på hur du kör stored procedure
+-- Example of how to execute the stored procedure
 EXEC GetUserInformation @UserID = 'U4';
-
-
-
 
 -- Create a stored procedure to get order information for a specific user
 CREATE PROCEDURE GetOrdersByUser
@@ -275,19 +262,14 @@ BEGIN
         Products P ON OI.ProductID = P.ProductID
     WHERE
         O.UserID = @UserID;
-
 END;
-
 
 -- Execute the stored procedure for a specific user (e.g., 'U1')
 EXEC GetOrdersByUser @UserID = 'U1';
 
-
-
-
 ---------------------------------------------------------------------------------------------
 
--- 12. Skapa en syntax som använder IF
+-- 12. Create syntax using IF
 
 DECLARE @UserID Nvarchar(10); -- Declare the variable
 SET @UserID = 'U10'; -- Try U20
@@ -305,16 +287,14 @@ BEGIN
 END
 ELSE
 BEGIN
-    PRINT '-----> VERY LAZY USER Meybe: The user has no favorites or The user is not availbe in this DB :)) ';
+    PRINT '-----> VERY LAZY USER Maybe: The user has no favorites or The user is not available in this DB :)) ';
 END
-
-
 
 ---------------------------------------------------------------------------------------------
 
-13. Skapa minst 2 SQL views
+-- 13. Create at least 2 SQL views
 
--- View 1: CustomerOrders:Show all customer orders and order details
+-- View 1: CustomerOrders: Show all customer orders and order details
 
 CREATE VIEW CustomerOrders AS
 SELECT
@@ -338,12 +318,10 @@ INNER JOIN Users U ON O.UserID = U.UserID
 INNER JOIN OrderItems OI ON O.OrderID = OI.OrderID
 INNER JOIN Products P ON OI.ProductID = P.ProductID;
 
-
 -- Query the created view
 SELECT * FROM CustomerOrders
 
-
--- View: ProductTotalSales: Create a view to show total sales for each product
+-- View 2: ProductTotalSales: Create a view to show total sales for each product
 CREATE VIEW ProductTotalSales AS
 SELECT
     P.ProductID,
@@ -357,12 +335,11 @@ GROUP BY P.ProductID, P.ProductName;
 -- Query to retrieve total sales for each product
 SELECT * FROM ProductTotalSales;
 
-
 ---------------------------------------------------------------------------------------------
 
--- 14. Skapa minst 1 syntax som innehåller en sub query
+-- 14. Create at least 1 syntax that contains a subquery
 
--- a list of users along with details about their most recent activity, including the activity type and timestamp.
+-- List of users along with details about their most recent activity, including the activity type and timestamp.
 SELECT 
     u.UserID,
     u.FirstName,
@@ -377,8 +354,6 @@ SELECT
      ORDER BY ua.ActivityTimestamp DESC) AS LatestActivityTimestamp
 FROM Users u;
 
-
-
 -- Fetch products that are currently offered with a discount percentage greater than 15%.
 SELECT *
 FROM Products
@@ -388,10 +363,9 @@ WHERE ProductID IN (
     WHERE DiscountPercentage > 15.00
 );
 
-
 ---------------------------------------------------------------------------------------------
 
--- 15. Skapa minst 1 Index
+-- 15. Create at least 1 Index
 
 -- The purpose of creating an index is to enhance the speed of data retrieval operations, particularly SELECT queries. 
 CREATE INDEX IX_UserAddress_UserID ON UserAddress(UserID);
