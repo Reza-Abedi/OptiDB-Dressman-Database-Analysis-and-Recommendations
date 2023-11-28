@@ -9,14 +9,21 @@ This comprehensive database system is designed to manage various aspects of an e
 ## Strengths
 #### Normalization: 
 The tables seem to be normalized, reducing redundancy and improving data integrity.
-- Clear Relationships: Relationships between entities are well-defined using foreign keys, ensuring data consistency.
-- 	Automated ID Generation: The use of sequences and default constraints for user and product IDs automates the generation of unique identifiers, streamlining data entry.
-	Flexibility: The design allows for flexibility, such as multiple addresses and payment methods per user, supporting diverse user scenarios.
-	Hierarchical Product Categorization: The inclusion of a hierarchical structure for product categories enables a systematic and organized approach to product classification.
+#### Clear Relationships:
+Relationships between entities are well-defined using foreign keys, ensuring data consistency.
+#### Automated ID Generation:
+The use of sequences and default constraints for user and product IDs automates the generation of unique identifiers, streamlining data entry.
+#### Flexibility
+The design allows for flexibility, such as multiple addresses and payment methods per user, supporting diverse user scenarios.
+#### Hierarchical Product Categorization: 
+The inclusion of a hierarchical structure for product categories enables a systematic and organized approach to product classification.
 Considerations for Improvement
-	Documentation: While my SQL statements provide clarity on table creation and constraints, adding comments or documentation would enhance readability and understanding, especially for others who might work with or review the database.
-	Data Types: Ensure that data types are chosen appropriately for each field. For example, consider using more specific data types like INT for user IDs instead of NVARCHAR(10).
-	Outlet Functionality: The introduction of an "IsInOutlet" column is a useful feature. However, consider providing additional information or documentation on how the outlet functionality is intended to work, including any business rules related to it.
+#### Documentation: 
+While my SQL statements provide clarity on table creation and constraints, adding comments or documentation would enhance readability and understanding, especially for others who might work with or review the database.
+#### Data Types: 
+Ensure that data types are chosen appropriately for each field. For example, consider using more specific data types like INT for user IDs instead of NVARCHAR(10).
+#### Outlet Functionality:
+The introduction of an "IsInOutlet" column is a useful feature. However, consider providing additional information or documentation on how the outlet functionality is intended to work, including any business rules related to it.
 
 Constraints in the Database Schema
 This section outlines key business rules and constraints embedded in the database schema to ensure data integrity and meaningful relationships among entities. From enforcing unique user identifiers to managing product categorization and customer interactions, these rules guide the behavior and structure of the database. The constraints serve as a foundation for maintaining accuracy and coherence in the representation of users, addresses, payment methods, products, shopping carts, orders, reviews, favorites, and promotions within the database system.
