@@ -1,5 +1,6 @@
 # OptiDB-Dressman-Database-Analysis-and-Recommendations
 The selection of the name 'Dressmann' is purely hypothetical in the context of this assignment.
+// This report and the associated SQL queries, stored procedures, and views were authored by M.Reza Abedi
 
  
 ## Summary of the Database Structure and Business Rules
